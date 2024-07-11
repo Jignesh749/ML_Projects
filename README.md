@@ -1,6 +1,3 @@
-Sure, here's the description written in the third person:
-
----
 
 # Rock or Mine Prediction System
 
