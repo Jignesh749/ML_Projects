@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
-import warnings  # 👈 added for warning suppression
+import warnings  # added for warning suppression
 import gdown
 import os
 
