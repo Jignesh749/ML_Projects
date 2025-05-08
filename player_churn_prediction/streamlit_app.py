@@ -74,12 +74,17 @@ st.write(f"Input Data Shape: {input_data.shape}")
 # Check that the input data has 16 features (this should match the model's expectation)
 assert input_data.shape[1] == 16, f"Expected 16 features, but got {input_data.shape[1]} features."
 
+# Scaling input_data (only the numerical values)
+scaled_input = scaler.transform(input_data[:, :7])  # Assuming the first 7 columns are numerical
+
+# Combine scaled numerical data with non-scaled categorical data
+input_scaled = np.hstack([scaled_input, input_data[:, 7:]])
+
 # Prediction
 if st.button("Predict Engagement Level"):
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=UserWarning)
-        input_scaled = scaler.transform(input_data)  # Suppress warning
-
+        
     pred = model.predict(input_scaled)
     pred_label = label_encoder.inverse_transform(pred)[0]
     st.success(f"🎯 Predicted Engagement Level: **{pred_label}**")
