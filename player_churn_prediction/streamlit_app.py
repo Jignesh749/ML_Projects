@@ -6,7 +6,7 @@ import gdown
 import os
 
 
-MODEL_URL_ID = "1AbCDEfgHiJKlmNopQRsTUVwxYZ"  # replace with your actual file ID
+MODEL_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"  # replace with your actual file ID
 MODEL_PATH = "best_rf_model.pkl"
 
 # Download model from Google Drive if not present
