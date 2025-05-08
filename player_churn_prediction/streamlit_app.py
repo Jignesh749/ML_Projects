@@ -8,7 +8,7 @@ import os
 
 # Google Drive file IDs
 MODEL_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"
-SCALER_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"  # Optional, if scaling is needed
+SCALER_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"  # Optional, only if scaling is needed
 ENCODER_URL_ID = "1LPFDbaHAx1of39nJ-VeMNRav7q2cSd4K"
 
 # Paths
@@ -28,7 +28,9 @@ if not os.path.exists(ENCODER_PATH):
 
 # Load files
 model = joblib.load(MODEL_PATH)
-scaler = joblib.load(SCALER_PATH)  # Optional, if scaling is needed
+scaler = None
+if os.path.exists(SCALER_PATH):
+    scaler = joblib.load(SCALER_PATH)  # Optional, if scaling is needed
 label_encoder = joblib.load(ENCODER_PATH)
 
 st.title("🎮 Player Engagement Level Predictor")
@@ -74,8 +76,9 @@ st.write(f"Input Data Shape: {input_data.shape}")
 # Check that the input data has 16 features (this should match the model's expectation)
 assert input_data.shape[1] == 16, f"Expected 16 features, but got {input_data.shape[1]} features."
 
-# Scaling input_data (only the numerical values) if scaling is needed
-if scaler:  # Only scale if a scaler exists
+# Skip scaling if not required
+if scaler:
+    # Scaling input_data (only the numerical values) if scaling is needed
     numerical_features = input_data[:, :7]  # Assuming the first 7 columns are numerical
     scaled_input = scaler.transform(numerical_features)  # Apply scaling
 
