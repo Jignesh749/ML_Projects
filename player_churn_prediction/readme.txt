@@ -1,5 +1,5 @@
 streamlit
 numpy
-scikit-learn
 joblib
 gdown
+scikit-learn
