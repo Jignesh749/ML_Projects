@@ -75,7 +75,8 @@ st.write(f"Input Data Shape: {input_data.shape}")
 assert input_data.shape[1] == 16, f"Expected 16 features, but got {input_data.shape[1]} features."
 
 # Scaling input_data (only the numerical values)
-scaled_input = scaler.transform(input_data[:, :7])  # Assuming the first 7 columns are numerical
+numerical_features = input_data[:, :7]  # Assuming the first 7 columns are numerical
+scaled_input = scaler.transform(numerical_features)
 
 # Combine scaled numerical data with non-scaled categorical data
 input_scaled = np.hstack([scaled_input, input_data[:, 7:]])
