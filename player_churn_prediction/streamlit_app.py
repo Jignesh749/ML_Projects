@@ -6,17 +6,30 @@ import gdown
 import os
 
 
-MODEL_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"  # replace with your actual file ID
-MODEL_PATH = "best_rf_model.pkl"
+# Google Drive file IDs
+MODEL_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"
+SCALER_URL_ID = "1umhIDybDcx9RyF-iBAYcJocAWJhHaGqW"
+ENCODER_URL_ID = "1LPFDbaHAx1of39nJ-VeMNRav7q2cSd4K"
 
-# Download model from Google Drive if not present
+# Paths
+MODEL_PATH = "best_rf_model.pkl"
+SCALER_PATH = "scaler.pkl"
+ENCODER_PATH = "label_encoder.pkl"
+
+# Download if not present
 if not os.path.exists(MODEL_PATH):
     gdown.download(id=MODEL_URL_ID, output=MODEL_PATH, quiet=False)
 
-# Load model, scaler, and label encoder
+if not os.path.exists(SCALER_PATH):
+    gdown.download(id=SCALER_URL_ID, output=SCALER_PATH, quiet=False)
+
+if not os.path.exists(ENCODER_PATH):
+    gdown.download(id=ENCODER_URL_ID, output=ENCODER_PATH, quiet=False)
+
+# Load files
 model = joblib.load(MODEL_PATH)
-scaler = joblib.load("scaler.pkl")
-label_encoder = joblib.load("label_encoder.pkl")
+scaler = joblib.load(SCALER_PATH)
+label_encoder = joblib.load(ENCODER_PATH)
 
 st.title("🎮 Player Engagement Level Predictor")
 
